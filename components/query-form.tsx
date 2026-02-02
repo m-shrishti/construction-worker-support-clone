@@ -24,7 +24,7 @@ export default function QueryForm() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
@@ -45,8 +45,42 @@ export default function QueryForm() {
       return
     }
 
-    console.log('[v0] Form submitted:', formData)
-    setSubmitted(true)
+    // console.log('[v0] Form submitted:', formData)
+    // setSubmitted(true)
+    try {
+      const res = await fetch('/api/test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      setSubmitted(true);
+
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          verification: '',
+        });
+        setSubmitted(false);
+      }, 3000);
+
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    }
 
     // Reset form after 3 seconds
     setTimeout(() => {

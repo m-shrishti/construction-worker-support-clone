@@ -14,7 +14,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8 h-[68px]">
           {/* Logo Section */}
-          <div className="flex items-center gap-3 pr-6 boarder-r boarder-white/30">
+          <div className="flex items-center gap-3 pr-6 border-r border-white/30">
             <div className="flex items-center h-full pr-6 border-r border-white/30 overflow-hidden">
               <Image
                 src="/pictures/logo-alt2.webp"
